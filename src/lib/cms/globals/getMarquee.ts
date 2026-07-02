@@ -1,9 +1,9 @@
 import { getPayloadClient } from '../client'
 
-export async function getHeader() {
+export async function getMarquee() {
   const payload = await getPayloadClient()
 
   return payload.findGlobal({
-    slug: 'header',
+    slug: 'marquee',
   })
 }

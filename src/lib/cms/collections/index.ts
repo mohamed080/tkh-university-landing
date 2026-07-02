@@ -1,0 +1,5 @@
+export * from './getPartners'
+export * from './getMajors'
+export * from './getEvents'
+export * from './getTestimonials'
+export * from './getNews'

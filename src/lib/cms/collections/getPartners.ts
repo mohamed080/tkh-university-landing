@@ -1,10 +1,10 @@
 import { getPayloadClient } from '../client'
 
-export async function getMajors() {
+export async function getPartners() {
   const payload = await getPayloadClient()
 
-  const majors = await payload.find({
-    collection: 'majors',
+  const partners = await payload.find({
+    collection: 'partners',
     where: {
       isActive: {
         equals: true,
@@ -13,5 +13,5 @@ export async function getMajors() {
     sort: 'displayOrder',
   })
 
-  return majors.docs
+  return partners.docs
 }
