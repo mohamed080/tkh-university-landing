@@ -94,12 +94,14 @@ export interface Config {
     hero: Hero;
     experience: Experience;
     partnersSection: PartnersSection;
+    marquee: Marquee;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
     experience: ExperienceSelect<false> | ExperienceSelect<true>;
     partnersSection: PartnersSectionSelect<false> | PartnersSectionSelect<true>;
+    marquee: MarqueeSelect<false> | MarqueeSelect<true>;
   };
   locale: null;
   widgets: {
@@ -485,6 +487,23 @@ export interface PartnersSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "marquee".
+ */
+export interface Marquee {
+  id: string;
+  rows?:
+    | {
+        type: 'logo' | 'text';
+        logo?: (string | null) | Media;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -591,6 +610,23 @@ export interface PartnersSectionSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "marquee_select".
+ */
+export interface MarqueeSelect<T extends boolean = true> {
+  rows?:
+    | T
+    | {
+        type?: T;
+        logo?: T;
+        label?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
