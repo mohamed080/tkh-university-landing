@@ -104,6 +104,7 @@ export interface Config {
     majorsSection: MajorsSection;
     eventsSection: EventsSection;
     testimonialsSection: TestimonialsSection;
+    admissions: Admission;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -114,6 +115,7 @@ export interface Config {
     majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
     eventsSection: EventsSectionSelect<false> | EventsSectionSelect<true>;
     testimonialsSection: TestimonialsSectionSelect<false> | TestimonialsSectionSelect<true>;
+    admissions: AdmissionsSelect<false> | AdmissionsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -661,6 +663,29 @@ export interface TestimonialsSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admissions".
+ */
+export interface Admission {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  steps?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -829,6 +854,31 @@ export interface TestimonialsSectionSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admissions_select".
+ */
+export interface AdmissionsSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

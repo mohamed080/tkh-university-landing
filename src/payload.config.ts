@@ -20,6 +20,7 @@ import { Marquee } from './globals/Marquee'
 import { MajorsSection } from './globals/Majors'
 import { EventsSection } from './globals/Events'
 import { TestimonialsSection } from './globals/Testimonials'
+import { Admissions } from './globals/Admission'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,7 +33,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Partners, Majors, Events, Testimonials],
-  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection, TestimonialsSection],
+  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection, TestimonialsSection, Admissions],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
