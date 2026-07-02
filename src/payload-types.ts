@@ -109,6 +109,7 @@ export interface Config {
     admissions: Admission;
     newsSection: NewsSection;
     contact: Contact;
+    footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -122,6 +123,7 @@ export interface Config {
     admissions: AdmissionsSelect<false> | AdmissionsSelect<true>;
     newsSection: NewsSectionSelect<false> | NewsSectionSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   widgets: {
@@ -757,6 +759,59 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  logo: string | Media;
+  description: string;
+  contact: {
+    phone: string;
+    address: string;
+    email: string;
+  };
+  searchTitle: string;
+  search: {
+    placeholder: string;
+    buttonLabel: string;
+  };
+  cta: {
+    label: string;
+    href: string;
+  };
+  socialLinks?:
+    | {
+        platform: 'facebook' | 'instagram' | 'linkedin';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  navigationGroups?:
+    | {
+        title?: string | null;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  bottomLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -985,6 +1040,65 @@ export interface ContactSelect<T extends boolean = true> {
   emailPlaceholder?: T;
   messagePlaceholder?: T;
   submitButtonLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  description?: T;
+  contact?:
+    | T
+    | {
+        phone?: T;
+        address?: T;
+        email?: T;
+      };
+  searchTitle?: T;
+  search?:
+    | T
+    | {
+        placeholder?: T;
+        buttonLabel?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  navigationGroups?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  bottomLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  copyright?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
