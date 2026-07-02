@@ -73,6 +73,7 @@ export interface Config {
     majors: Major;
     events: Event;
     testimonials: Testimonial;
+    news: News;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     majors: MajorsSelect<false> | MajorsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -105,6 +107,8 @@ export interface Config {
     eventsSection: EventsSection;
     testimonialsSection: TestimonialsSection;
     admissions: Admission;
+    newsSection: NewsSection;
+    contact: Contact;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -116,6 +120,8 @@ export interface Config {
     eventsSection: EventsSectionSelect<false> | EventsSectionSelect<true>;
     testimonialsSection: TestimonialsSectionSelect<false> | TestimonialsSectionSelect<true>;
     admissions: AdmissionsSelect<false> | AdmissionsSelect<true>;
+    newsSection: NewsSectionSelect<false> | NewsSectionSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: null;
   widgets: {
@@ -263,6 +269,21 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  category: string;
+  title: string;
+  date: string;
+  coverImage: string | Media;
+  displayOrder?: number | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -308,6 +329,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: string | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: string | News;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -456,6 +481,20 @@ export interface TestimonialsSelect<T extends boolean = true> {
   graduationYear?: T;
   currentRole?: T;
   quote?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  category?: T;
+  title?: T;
+  date?: T;
+  coverImage?: T;
   displayOrder?: T;
   isActive?: T;
   updatedAt?: T;
@@ -686,6 +725,38 @@ export interface Admission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsSection".
+ */
+export interface NewsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  phonePlaceholder: string;
+  emailPlaceholder: string;
+  messagePlaceholder: string;
+  submitButtonLabel: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -880,6 +951,40 @@ export interface AdmissionsSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsSection_select".
+ */
+export interface NewsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  phonePlaceholder?: T;
+  emailPlaceholder?: T;
+  messagePlaceholder?: T;
+  submitButtonLabel?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
