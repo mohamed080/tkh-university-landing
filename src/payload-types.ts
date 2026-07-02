@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     partners: Partner;
     majors: Major;
+    events: Event;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     majors: MajorsSelect<false> | MajorsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -98,6 +100,7 @@ export interface Config {
     partnersSection: PartnersSection;
     marquee: Marquee;
     majorsSection: MajorsSection;
+    eventsSection: EventsSection;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -106,6 +109,7 @@ export interface Config {
     partnersSection: PartnersSectionSelect<false> | PartnersSectionSelect<true>;
     marquee: MarqueeSelect<false> | MarqueeSelect<true>;
     majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
+    eventsSection: EventsSectionSelect<false> | EventsSectionSelect<true>;
   };
   locale: null;
   widgets: {
@@ -220,6 +224,21 @@ export interface Major {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  coverImage: string | Media;
+  displayOrder: number;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -257,6 +276,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'majors';
         value: string | Major;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: string | Event;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -374,6 +397,20 @@ export interface MajorsSelect<T extends boolean = true> {
   name?: T;
   coverImage?: T;
   programsCount?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  date?: T;
+  coverImage?: T;
   displayOrder?: T;
   isActive?: T;
   updatedAt?: T;
@@ -550,6 +587,21 @@ export interface MajorsSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "eventsSection".
+ */
+export interface EventsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -684,6 +736,23 @@ export interface MarqueeSelect<T extends boolean = true> {
 export interface MajorsSectionSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "eventsSection_select".
+ */
+export interface EventsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
