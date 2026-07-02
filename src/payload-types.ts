@@ -89,9 +89,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     header: Header;
+    hero: Hero;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    hero: HeroSelect<false> | HeroSelect<true>;
   };
   locale: null;
   widgets: {
@@ -361,6 +363,30 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: string;
+  headline: string;
+  description: string;
+  backgroundVideo: string | Media;
+  /**
+   * Used on mobile or if video fails to load
+   */
+  fallbackImage: string | Media;
+  primaryCTA: {
+    label: string;
+    href: string;
+  };
+  secondaryCTA: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -394,6 +420,31 @@ export interface HeaderSelect<T extends boolean = true> {
         href?: T;
       };
   primaryCTA?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  headline?: T;
+  description?: T;
+  backgroundVideo?: T;
+  fallbackImage?: T;
+  primaryCTA?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  secondaryCTA?:
     | T
     | {
         label?: T;
