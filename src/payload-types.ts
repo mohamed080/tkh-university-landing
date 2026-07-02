@@ -557,28 +557,50 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  searchAction: {
+    label: string;
+    href: string;
+  };
+  contactLink: {
+    label: string;
+    href: string;
+  };
+  primaryCTA: {
+    label: string;
+    href: string;
+  };
   mainNavigation?:
     | {
         label: string;
         href: string;
-        children?:
-          | {
-              label: string;
-              href: string;
-              id?: string | null;
-            }[]
-          | null;
+        megaMenu?: {
+          cards?:
+            | {
+                title: string;
+                description?: string | null;
+                image?: (string | null) | Media;
+                href: string;
+                id?: string | null;
+              }[]
+            | null;
+          links?:
+            | {
+                label: string;
+                href: string;
+                id?: string | null;
+              }[]
+            | null;
+          previewImage?: (string | null) | Media;
+          previewImages?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
         id?: string | null;
       }[]
     | null;
-  contactLink?: {
-    label?: string | null;
-    href?: string | null;
-  };
-  primaryCTA?: {
-    label?: string | null;
-    href?: string | null;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -824,19 +846,11 @@ export interface HeaderSelect<T extends boolean = true> {
         openInNewTab?: T;
         id?: T;
       };
-  mainNavigation?:
+  searchAction?:
     | T
     | {
         label?: T;
         href?: T;
-        children?:
-          | T
-          | {
-              label?: T;
-              href?: T;
-              id?: T;
-            };
-        id?: T;
       };
   contactLink?:
     | T
@@ -849,6 +863,40 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+      };
+  mainNavigation?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        megaMenu?:
+          | T
+          | {
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              links?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              previewImage?: T;
+              previewImages?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
