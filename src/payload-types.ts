@@ -90,10 +90,12 @@ export interface Config {
   globals: {
     header: Header;
     hero: Hero;
+    experience: Experience;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
+    experience: ExperienceSelect<false> | ExperienceSelect<true>;
   };
   locale: null;
   widgets: {
@@ -387,6 +389,31 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience".
+ */
+export interface Experience {
+  id: string;
+  eyebrow?: string | null;
+  title: string;
+  tabs: {
+    title: string;
+    description: string;
+    image: string | Media;
+    statBadge: {
+      label: string;
+      value: string;
+    };
+    id?: string | null;
+  }[];
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -445,6 +472,37 @@ export interface HeroSelect<T extends boolean = true> {
         href?: T;
       };
   secondaryCTA?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience_select".
+ */
+export interface ExperienceSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  tabs?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        statBadge?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+            };
+        id?: T;
+      };
+  cta?:
     | T
     | {
         label?: T;
