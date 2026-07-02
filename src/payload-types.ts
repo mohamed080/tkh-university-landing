@@ -72,6 +72,7 @@ export interface Config {
     partners: Partner;
     majors: Major;
     events: Event;
+    testimonials: Testimonial;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     partners: PartnersSelect<false> | PartnersSelect<true>;
     majors: MajorsSelect<false> | MajorsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -101,6 +103,7 @@ export interface Config {
     marquee: Marquee;
     majorsSection: MajorsSection;
     eventsSection: EventsSection;
+    testimonialsSection: TestimonialsSection;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -110,6 +113,7 @@ export interface Config {
     marquee: MarqueeSelect<false> | MarqueeSelect<true>;
     majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
     eventsSection: EventsSectionSelect<false> | EventsSectionSelect<true>;
+    testimonialsSection: TestimonialsSectionSelect<false> | TestimonialsSectionSelect<true>;
   };
   locale: null;
   widgets: {
@@ -239,6 +243,24 @@ export interface Event {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: string;
+  studentName: string;
+  studentAvatar: string | Media;
+  coverImage: string | Media;
+  universityLogo: string | Media;
+  graduationYear: string;
+  currentRole: string;
+  quote: string;
+  displayOrder: number;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -280,6 +302,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: string | Event;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: string | Testimonial;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -411,6 +437,23 @@ export interface EventsSelect<T extends boolean = true> {
   description?: T;
   date?: T;
   coverImage?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  studentName?: T;
+  studentAvatar?: T;
+  coverImage?: T;
+  universityLogo?: T;
+  graduationYear?: T;
+  currentRole?: T;
+  quote?: T;
   displayOrder?: T;
   isActive?: T;
   updatedAt?: T;
@@ -602,6 +645,22 @@ export interface EventsSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonialsSection".
+ */
+export interface TestimonialsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -747,6 +806,24 @@ export interface MajorsSectionSelect<T extends boolean = true> {
 export interface EventsSectionSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonialsSection_select".
+ */
+export interface TestimonialsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
   cta?:
     | T
     | {

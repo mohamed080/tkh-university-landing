@@ -10,6 +10,7 @@ import { Media } from './collections/Media'
 import { Partners } from './collections/Partners'
 import { Majors } from './collections/Majors'
 import { Events } from './collections/Events'
+import { Testimonials } from './collections/Testimonials'
 
 import { Header } from './globals/Header'
 import { Hero } from './globals/Hero'
@@ -18,6 +19,7 @@ import { PartnersSection } from './globals/Partners'
 import { Marquee } from './globals/Marquee'
 import { MajorsSection } from './globals/Majors'
 import { EventsSection } from './globals/Events'
+import { TestimonialsSection } from './globals/Testimonials'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,8 +31,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Partners, Majors, Events],
-  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection],
+  collections: [Users, Media, Partners, Majors, Events, Testimonials],
+  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection, TestimonialsSection],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
