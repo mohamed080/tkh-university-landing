@@ -1,4 +1,5 @@
 import React from 'react'
+import localFont from 'next/font/local'
 import './styles.css'
 
 export const metadata = {
@@ -6,14 +7,18 @@ export const metadata = {
   title: 'Payload Blank Template',
 }
 
+const futura = localFont({
+  src: '../../assets/fonts/Futura-Medium.ttf',
+  variable: '--font-futura',
+  display: 'swap',
+})
+
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
+    <html lang="en" className={`${futura.variable}`}>
+      <body>{children}</body>
     </html>
   )
 }
