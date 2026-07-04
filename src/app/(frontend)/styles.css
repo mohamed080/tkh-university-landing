@@ -35,12 +35,6 @@ body {
   font-family: var(--font-futura), sans-serif;
 }
 
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
 @keyframes fillProgress {
   from {
     height: 0%;
@@ -55,4 +49,24 @@ img {
   .eyebrow {
     @apply inline-block bg-navy px-5 py-2 text-sm sm:text-base text-white tracking-wider;
   }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
