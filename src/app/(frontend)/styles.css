@@ -50,3 +50,9 @@ img {
     height: 100%;
   }
 }
+
+@layer components {
+  .eyebrow {
+    @apply inline-block bg-navy px-5 py-2 text-sm sm:text-base text-white tracking-wider;
+  }
+}

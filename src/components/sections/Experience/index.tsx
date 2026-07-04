@@ -59,7 +59,7 @@ export function Experience({ data }: ExperienceProps) {
 <section className="grid gap-16 bg-gradient-primary px-4 sm:px-10 py-20 lg:grid-cols-2 lg:px-16 mt-6">
       <div>
         {data.eyebrow && (
-          <span className="inline-block bg-navy px-5 py-2 text-sm sm:text-base text-white tracking-wider ml-8">
+          <span className="eyebrow ml-8">
             {data.eyebrow}
           </span>
         )}

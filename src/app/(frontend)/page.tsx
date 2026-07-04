@@ -1,10 +1,11 @@
 import { Experience } from '@/components/sections/Experience'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
-import { getExperience, getHeader, getHero } from '@/lib/cms'
+import { Partners } from '@/components/sections/Partners'
+import { getExperience, getHeader, getHero, getPartners, getPartnersSection } from '@/lib/cms'
 
 export default async function HomePage() {
-  const [header, hero, experience] = await Promise.all([getHeader(), getHero(), getExperience()])
+  const [header, hero, experience, partnersSection, partners] = await Promise.all([getHeader(), getHero(), getExperience(), getPartnersSection(), getPartners()])
 
   return (
     <>
@@ -12,6 +13,7 @@ export default async function HomePage() {
       <main>
         <Hero hero={hero} />
         <Experience data={experience} />
+        <Partners data={partnersSection} partners={partners} />
       </main>
     </>
   )
