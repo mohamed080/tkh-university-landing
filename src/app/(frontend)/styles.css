@@ -5,6 +5,19 @@
   --color-orange: #e84925;
   --color-primary: #101828;
   --color-secondary: #4A5565;
+  --color-navy: #273480;
+  
+  --background-image-gradient-primary: linear-gradient(
+    125.67deg,
+    #F5F7FB 26.64%,
+    #FDF1EE 76.11%
+  );
+
+  --background-image-gradient-reverse: linear-gradient(
+    232.95deg,
+    #FDF1EE 11.13%,
+    #F5F7FB 85.19%
+  );
 }
 
 * {
@@ -26,4 +39,14 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+@keyframes fillProgress {
+  from {
+    height: 0%;
+  }
+
+  to {
+    height: 100%;
+  }
 }
