@@ -9,6 +9,7 @@ import { Events } from '@/components/sections/Events'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { News } from '@/components/sections/News'
 import { Contact } from '@/components/sections/Contact'
+import { Footer } from '@/components/sections/Footer'
 
 import {
   getAdmissions,
@@ -16,6 +17,7 @@ import {
   getEvents,
   getEventsSection,
   getExperience,
+  getFooter,
   getHeader,
   getHero,
   getMajors,
@@ -47,6 +49,7 @@ export default async function HomePage() {
     newsSection,
     news,
     contact,
+    footer
   ] = await Promise.all([
     getHeader(),
     getHero(),
@@ -64,6 +67,7 @@ export default async function HomePage() {
     getNewsSection(),
     getNews(),
     getContact(),
+    getFooter(),
   ])
 
   return (
@@ -80,6 +84,7 @@ export default async function HomePage() {
         <Admissions data={admissions} />
         <News data={newsSection} news={news} />
         <Contact data={contact} />
+        <Footer data={footer} />
       </main>
     </>
   )
