@@ -44,7 +44,8 @@ export const Testimonials: CollectionConfig = {
     {
       name: 'graduationYear',
       label: 'Graduation Year',
-      type: 'text',
+      type: 'upload',
+      relationTo: 'media',
       required: true,
     },
     {

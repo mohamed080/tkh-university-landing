@@ -261,7 +261,7 @@ export interface Testimonial {
   studentAvatar: string | Media;
   coverImage: string | Media;
   universityLogo: string | Media;
-  graduationYear: string;
+  graduationYear: string | Media;
   currentRole: string;
   quote: string;
   displayOrder: number;

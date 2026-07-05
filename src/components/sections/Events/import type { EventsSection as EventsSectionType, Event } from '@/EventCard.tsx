@@ -42,7 +42,7 @@ export function EventCard({ event }: EventCardProps) {
 
       {formattedDate && (
         <div
-          className="absolute right-0 top-0 flex h-[80px] w-[86px] flex-col items-center justify-center gap-1 bg-orange text-white sm:h-[105px] sm:w-[113px] lg:h-[127px] lg:w-[137px]"
+          className="absolute right-0 top-0 flex h-20 w-21.5 flex-col items-center justify-center gap-1 bg-orange text-white sm:h-26.25 sm:w-28.25 lg:h-31.75 lg:w-34.25"
           style={{ clipPath: 'polygon(14% 0, 100% 0, 100% 55%, 85% 100%, 0 100%, 0 45%)' }}
         >
           <span className="text-base font-bold leading-none sm:text-xl lg:text-2xl">

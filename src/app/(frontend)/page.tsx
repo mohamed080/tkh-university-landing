@@ -5,6 +5,7 @@ import { Hero } from '@/components/sections/Hero'
 import { Majors } from '@/components/sections/Majors'
 import { Marquee } from '@/components/sections/Marquee'
 import { Partners } from '@/components/sections/Partners'
+import { Testimonials } from '@/components/sections/Testimonials'
 import {
   getEvents,
   getEventsSection,
@@ -16,10 +17,13 @@ import {
   getMarquee,
   getPartners,
   getPartnersSection,
+  getTestimonials,
+  getTestimonialsSection,
 } from '@/lib/cms'
+import { get } from 'http'
 
 export default async function HomePage() {
-  const [header, hero, experience, partnersSection, partners, marquee, majorsSection, majors, eventsSection, events] = await Promise.all([
+  const [header, hero, experience, partnersSection, partners, marquee, majorsSection, majors, eventsSection, events, testimonialsSection, testimonials] = await Promise.all([
     getHeader(),
     getHero(),
     getExperience(),
@@ -30,6 +34,8 @@ export default async function HomePage() {
     getMajors(),
     getEventsSection(),
     getEvents(),
+    getTestimonialsSection(),
+    getTestimonials(),
   ])
 
   return (
@@ -42,6 +48,7 @@ export default async function HomePage() {
         <Marquee data={marquee} />
         <Majors data={majorsSection} majors={majors} />
         <Events data={eventsSection} events={events} />
+        <Testimonials data={testimonialsSection} testimonials={testimonials} />
       </main>
     </>
   )
