@@ -8,9 +8,11 @@ import { Majors } from '@/components/sections/Majors'
 import { Events } from '@/components/sections/Events'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { News } from '@/components/sections/News'
+import { Contact } from '@/components/sections/Contact'
 
 import {
   getAdmissions,
+  getContact,
   getEvents,
   getEventsSection,
   getExperience,
@@ -44,6 +46,7 @@ export default async function HomePage() {
     admissions,
     newsSection,
     news,
+    contact,
   ] = await Promise.all([
     getHeader(),
     getHero(),
@@ -60,6 +63,7 @@ export default async function HomePage() {
     getAdmissions(),
     getNewsSection(),
     getNews(),
+    getContact(),
   ])
 
   return (
@@ -75,6 +79,7 @@ export default async function HomePage() {
         <Testimonials data={testimonialsSection} testimonials={testimonials} />
         <Admissions data={admissions} />
         <News data={newsSection} news={news} />
+        <Contact data={contact} />
       </main>
     </>
   )
