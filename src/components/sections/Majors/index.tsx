@@ -66,11 +66,11 @@ export function Majors({ data, majors }: MajorsProps) {
   if (!activeMajors.length) return null
 
   return (
-    <section className="flex flex-col items-center bg-gradient-reverse px-4 py-20">
+    <section className="flex flex-col items-center bg-gradient-reverse px-4 py-10 sm:py-20">
       <div className="mb-10 flex flex-col items-center text-center">
         {data.eyebrow && <span className="eyebrow">{data.eyebrow}</span>}
 
-        <h2 className="mt-4 max-w-lg text-4xl font-bold leading-tight text-primary lg:text-5xl">
+        <h2 className="section-title">
           {data.title}
         </h2>
       </div>

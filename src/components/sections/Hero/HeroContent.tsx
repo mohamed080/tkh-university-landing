@@ -7,7 +7,7 @@ type Props = {
 
 export function HeroContent({ hero }: Props) {
   return (
-    <div className="absolute inset-0 bottom-15 lg:-bottom-24 z-10 mx-auto flex h-full mt-auto items-end px-10">
+    <div className="absolute inset-0 bottom-15 lg:-bottom-24 z-10 mx-auto flex h-full mt-auto items-end px-6 sm:px-10">
       <div className="grid w-full gap-4 sm:gap-8 grid-cols-1 xl:grid-cols-[minmax(0,680px)_minmax(500px,800px)] xl:items-end xl:justify-between xl:gap-15">
         <h1 className="max-w-md lg:max-w-3xl text-5xl font-bold leading-[0.95] text-white md:text-6xl lg:text-7xl">
           {hero.headline}

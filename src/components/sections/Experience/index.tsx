@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { ExperienceImage } from './ExperienceImage'
 import type { ExperienceData } from './types'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 
 type ExperienceProps = {
   data: ExperienceData
@@ -56,13 +57,9 @@ export function Experience({ data }: ExperienceProps) {
   const activeTab = tabs[activeIndex]
 
   return (
-<section className="grid gap-16 bg-gradient-primary px-4 sm:px-10 py-20 lg:grid-cols-2 lg:px-16 mt-6">
+    <section className="grid gap-16 bg-gradient-primary px-4 sm:px-10 py-20 lg:grid-cols-2 lg:px-16 mt-6">
       <div>
-        {data.eyebrow && (
-          <span className="eyebrow ml-8">
-            {data.eyebrow}
-          </span>
-        )}
+        {data.eyebrow && <span className="eyebrow ml-8">{data.eyebrow}</span>}
 
         <h2 className="mt-4 text-3xl font-bold leading-tight text-primary lg:text-4xl ml-8">
           {data.title}
@@ -78,7 +75,6 @@ export function Experience({ data }: ExperienceProps) {
               transitionDuration: `${AUTOPLAY_DURATION}ms`,
               background: 'linear-gradient(270deg, #273480 0%, #E84925 100%)',
             }}
-
           />
 
           <ul className="flex flex-col">
@@ -115,18 +111,9 @@ export function Experience({ data }: ExperienceProps) {
                 </li>
               )
             })}
-
           </ul>
         </div>
-            {data.cta?.label && (
-                <Link
-                  href={data.cta.href || '#'}
-                  className="inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3 text-base text-white ml-8 mt-6"
-                >
-                  {data.cta.label}
-                  <ArrowUpRight size={18} className="h-6 w-6 rounded-full bg-white p-px text-orange" />
-                </Link>
-            )}
+        <ButtonLink label={data.cta?.label} href={data.cta?.href} className="ml-8 mt-6" />
       </div>
 
       <ExperienceImage tab={activeTab} />
