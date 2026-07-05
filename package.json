@@ -4,6 +4,7 @@
   "description": "A blank template to get started with Payload 3.0",
   "license": "MIT",
   "type": "module",
+  "packageManager": "pnpm@11.7.0",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
@@ -18,18 +19,27 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@payloadcms/db-mongodb": "3.85.2",
     "@payloadcms/next": "3.85.2",
     "@payloadcms/richtext-lexical": "3.85.2",
     "@payloadcms/ui": "3.85.2",
+    "@tailwindcss/postcss": "^4.3.2",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.23.0",
     "next": "16.2.6",
     "payload": "3.85.2",
+    "postcss": "^8.5.16",
     "react": "19.2.6",
     "react-dom": "19.2.6",
+    "react-hook-form": "^7.81.0",
+    "react-icons": "^5.7.0",
     "sharp": "0.34.2",
-    "@payloadcms/db-mongodb": "3.85.2"
+    "tailwindcss": "^4.3.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@playwright/test": "1.58.2",
@@ -50,12 +60,5 @@
   "engines": {
     "node": "^18.20.2 || >=20.9.0",
     "pnpm": "^9 || ^10 || ^11"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp",
-      "esbuild",
-      "unrs-resolver"
-    ]
   }
 }

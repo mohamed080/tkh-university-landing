@@ -69,6 +69,11 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    partners: Partner;
+    majors: Major;
+    events: Event;
+    testimonials: Testimonial;
+    news: News;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +83,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    partners: PartnersSelect<false> | PartnersSelect<true>;
+    majors: MajorsSelect<false> | MajorsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +97,34 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    header: Header;
+    hero: Hero;
+    experience: Experience;
+    partnersSection: PartnersSection;
+    marquee: Marquee;
+    majorsSection: MajorsSection;
+    eventsSection: EventsSection;
+    testimonialsSection: TestimonialsSection;
+    admissions: Admission;
+    newsSection: NewsSection;
+    contact: Contact;
+    footer: Footer;
+  };
+  globalsSelect: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    hero: HeroSelect<false> | HeroSelect<true>;
+    experience: ExperienceSelect<false> | ExperienceSelect<true>;
+    partnersSection: PartnersSectionSelect<false> | PartnersSectionSelect<true>;
+    marquee: MarqueeSelect<false> | MarqueeSelect<true>;
+    majorsSection: MajorsSectionSelect<false> | MajorsSectionSelect<true>;
+    eventsSection: EventsSectionSelect<false> | EventsSectionSelect<true>;
+    testimonialsSection: TestimonialsSectionSelect<false> | TestimonialsSectionSelect<true>;
+    admissions: AdmissionsSelect<false> | AdmissionsSelect<true>;
+    newsSection: NewsSectionSelect<false> | NewsSectionSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -163,6 +199,93 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: string;
+  name: string;
+  logo: string | Media;
+  coverImage: string | Media;
+  cta: {
+    label: string;
+    href: string;
+  };
+  facts?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  displayOrder: number;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majors".
+ */
+export interface Major {
+  id: string;
+  name: string;
+  coverImage: string | Media;
+  programsCount: number;
+  displayOrder?: number | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  coverImage: string | Media;
+  displayOrder: number;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: string;
+  studentName: string;
+  studentAvatar: string | Media;
+  coverImage: string | Media;
+  universityLogo: string | Media;
+  graduationYear: string | Media;
+  currentRole: string;
+  quote: string;
+  displayOrder: number;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  category: string;
+  title: string;
+  date: string;
+  coverImage: string | Media;
+  displayOrder?: number | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -192,6 +315,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'partners';
+        value: string | Partner;
+      } | null)
+    | ({
+        relationTo: 'majors';
+        value: string | Major;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: string | Event;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: string | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: string | News;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -277,6 +420,90 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners_select".
+ */
+export interface PartnersSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  coverImage?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  facts?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majors_select".
+ */
+export interface MajorsSelect<T extends boolean = true> {
+  name?: T;
+  coverImage?: T;
+  programsCount?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  date?: T;
+  coverImage?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  studentName?: T;
+  studentAvatar?: T;
+  coverImage?: T;
+  universityLogo?: T;
+  graduationYear?: T;
+  currentRole?: T;
+  quote?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  category?: T;
+  title?: T;
+  date?: T;
+  coverImage?: T;
+  displayOrder?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -314,6 +541,615 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  logo: string | Media;
+  topNavigation?:
+    | {
+        label: string;
+        href: string;
+        openInNewTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  searchAction: {
+    label: string;
+    href: string;
+  };
+  contactLink: {
+    label: string;
+    href: string;
+  };
+  primaryCTA: {
+    label: string;
+    href: string;
+  };
+  mainNavigation?:
+    | {
+        label: string;
+        href: string;
+        megaMenu?: {
+          cards?:
+            | {
+                title: string;
+                description?: string | null;
+                image?: (string | null) | Media;
+                href: string;
+                id?: string | null;
+              }[]
+            | null;
+          links?:
+            | {
+                label: string;
+                href: string;
+                id?: string | null;
+              }[]
+            | null;
+          previewImage?: (string | null) | Media;
+          previewImages?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: string;
+  headline: string;
+  description: string;
+  backgroundVideo: string | Media;
+  /**
+   * Used on mobile or if video fails to load
+   */
+  fallbackImage: string | Media;
+  primaryCTA: {
+    label: string;
+    href: string;
+  };
+  secondaryCTA: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience".
+ */
+export interface Experience {
+  id: string;
+  eyebrow?: string | null;
+  title: string;
+  tabs: {
+    title: string;
+    description: string;
+    image: string | Media;
+    statBadge: {
+      label: string;
+      value: string;
+    };
+    id?: string | null;
+  }[];
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnersSection".
+ */
+export interface PartnersSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "marquee".
+ */
+export interface Marquee {
+  id: string;
+  rows?:
+    | {
+        type: 'logo' | 'text';
+        logo?: (string | null) | Media;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majorsSection".
+ */
+export interface MajorsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "eventsSection".
+ */
+export interface EventsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonialsSection".
+ */
+export interface TestimonialsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admissions".
+ */
+export interface Admission {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  steps?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsSection".
+ */
+export interface NewsSection {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: {
+    label: string;
+    href: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  phonePlaceholder: string;
+  emailPlaceholder: string;
+  messagePlaceholder: string;
+  submitButtonLabel: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  logo: string | Media;
+  description: string;
+  contact: {
+    phone: string;
+    address: string;
+    email: string;
+  };
+  searchTitle: string;
+  search: {
+    placeholder: string;
+    buttonLabel: string;
+  };
+  cta: {
+    label: string;
+    href: string;
+  };
+  socialLinks?:
+    | {
+        platform: 'facebook' | 'instagram' | 'linkedin';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  navigationGroups?:
+    | {
+        title?: string | null;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  bottomLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  topNavigation?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        openInNewTab?: T;
+        id?: T;
+      };
+  searchAction?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  contactLink?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  primaryCTA?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  mainNavigation?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        megaMenu?:
+          | T
+          | {
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              links?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              previewImage?: T;
+              previewImages?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  headline?: T;
+  description?: T;
+  backgroundVideo?: T;
+  fallbackImage?: T;
+  primaryCTA?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  secondaryCTA?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience_select".
+ */
+export interface ExperienceSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  tabs?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        statBadge?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+            };
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnersSection_select".
+ */
+export interface PartnersSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "marquee_select".
+ */
+export interface MarqueeSelect<T extends boolean = true> {
+  rows?:
+    | T
+    | {
+        type?: T;
+        logo?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "majorsSection_select".
+ */
+export interface MajorsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "eventsSection_select".
+ */
+export interface EventsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonialsSection_select".
+ */
+export interface TestimonialsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admissions_select".
+ */
+export interface AdmissionsSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsSection_select".
+ */
+export interface NewsSectionSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  phonePlaceholder?: T;
+  emailPlaceholder?: T;
+  messagePlaceholder?: T;
+  submitButtonLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  description?: T;
+  contact?:
+    | T
+    | {
+        phone?: T;
+        address?: T;
+        email?: T;
+      };
+  searchTitle?: T;
+  search?:
+    | T
+    | {
+        placeholder?: T;
+        buttonLabel?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  navigationGroups?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  bottomLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
