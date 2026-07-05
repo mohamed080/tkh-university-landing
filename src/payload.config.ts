@@ -25,6 +25,7 @@ import { Admissions } from './globals/Admission'
 import { NewsSection } from './globals/News'
 import { Contact } from './globals/Contact'
 import { Footer } from './globals/Footer'
+import { SEO } from './globals/SEO'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -37,7 +38,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Partners, Majors, Events, Testimonials, News],
-  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection, TestimonialsSection, Admissions, NewsSection, Contact, Footer],
+  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection, TestimonialsSection, Admissions, NewsSection, Contact, Footer, SEO],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

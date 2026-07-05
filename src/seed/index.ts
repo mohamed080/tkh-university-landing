@@ -555,6 +555,18 @@ async function seed() {
     },
   })
 
+  console.log('Seeding SEO...')
+
+await payload.updateGlobal({
+  slug: 'seo',
+  data: {
+    title: 'TKH - The Knowledge Hub',
+    description:
+      'Your gateway to global education through international university partnerships in Egypt.',
+    ogImage: heroFallback,
+  },
+})
+
   console.log('\n✅ Seed complete.')
   process.exit(0)
 }
