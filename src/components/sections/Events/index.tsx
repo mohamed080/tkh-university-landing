@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { EventCard } from './EventCard'
-import type { EventsSectionData, EventItem } from './types'
+import type { EventsSectionData, EventItem } from  './types'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 
 type EventsProps = {
