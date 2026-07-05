@@ -33,11 +33,10 @@ export function Testimonials({ data, testimonials }: TestimonialsProps) {
     <section className="flex flex-col items-center bg-gradient-reverse px-4 py-10 sm:ps-10 sm:py-20 overflow-hidden">
       <div className="mb-10 flex flex-col items-center text-center sm:mb-14">
         {data.eyebrow && <span className="eyebrow">{data.eyebrow}</span>}
-        <h2 className="section-title">{data.title}</h2>
+        <h2 className="section-title max-w-xl">{data.title}</h2>
         <p className="mt-3 max-w-sm text-sm leading-6 text-secondary">{data.description}</p>
       </div>
 
-      {/* Stage — arrows overlap sides only from sm: upward */}
       <div className="relative flex w-full items-center justify-center">
         <button
           type="button"

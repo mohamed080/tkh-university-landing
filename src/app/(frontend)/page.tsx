@@ -1,12 +1,14 @@
-import { Admissions } from '@/components/sections/Admission'
-import { Events } from '@/components/sections/Events'
-import { Experience } from '@/components/sections/Experience'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
-import { Majors } from '@/components/sections/Majors'
-import { Marquee } from '@/components/sections/Marquee'
+import { Experience } from '@/components/sections/Experience'
 import { Partners } from '@/components/sections/Partners'
+import { Marquee } from '@/components/sections/Marquee'
+import { Admissions } from '@/components/sections/Admission'
+import { Majors } from '@/components/sections/Majors'
+import { Events } from '@/components/sections/Events'
 import { Testimonials } from '@/components/sections/Testimonials'
+import { News } from '@/components/sections/News'
+
 import {
   getAdmissions,
   getEvents,
@@ -17,6 +19,8 @@ import {
   getMajors,
   getMajorsSection,
   getMarquee,
+  getNews,
+  getNewsSection,
   getPartners,
   getPartnersSection,
   getTestimonials,
@@ -38,6 +42,8 @@ export default async function HomePage() {
     testimonialsSection,
     testimonials,
     admissions,
+    newsSection,
+    news,
   ] = await Promise.all([
     getHeader(),
     getHero(),
@@ -52,6 +58,8 @@ export default async function HomePage() {
     getTestimonialsSection(),
     getTestimonials(),
     getAdmissions(),
+    getNewsSection(),
+    getNews(),
   ])
 
   return (
@@ -66,6 +74,7 @@ export default async function HomePage() {
         <Events data={eventsSection} events={events} />
         <Testimonials data={testimonialsSection} testimonials={testimonials} />
         <Admissions data={admissions} />
+        <News data={newsSection} news={news} />
       </main>
     </>
   )
