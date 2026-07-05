@@ -57,7 +57,7 @@ export function Experience({ data }: ExperienceProps) {
   const activeTab = tabs[activeIndex]
 
   return (
-    <section className="grid gap-16 bg-gradient-primary px-4 sm:px-10 py-20 lg:grid-cols-2 lg:px-16 mt-6">
+    <section className="grid gap-16 bg-gradient-primary px-4 sm:px-10 py-20 lg:grid-cols-2 lg:px-16">
       <div>
         {data.eyebrow && <span className="eyebrow ml-8">{data.eyebrow}</span>}
 

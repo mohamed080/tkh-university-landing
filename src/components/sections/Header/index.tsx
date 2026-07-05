@@ -57,7 +57,7 @@ export function Header({ data }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className="sticky top-8 z-50 mx-6 sm:mx-10 overflow-hidden rounded-4xl bg-[#FFFFFFB2] shadow-sm backdrop-blur-md transition-all duration-300"
+      className="fixed top-8 left-6 right-6 z-50 overflow-hidden rounded-4xl bg-[#FFFFFFB2] shadow-sm backdrop-blur-md transition-all duration-300 sm:left-10 sm:right-10"
     >
       <TopNavigation
         items={data.topNavigation}

@@ -25,7 +25,7 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <div
-      className="group relative aspect-video w-full overflow-hidden bg-[#1B2A4E]"
+      className="group relative aspect-4/3 w-full overflow-hidden bg-[#1B2A4E] sm:aspect-video"
       style={{ clipPath: 'polygon(14% 0, 100% 0, 100% 55%, 85% 100%, 0 100%, 0 45%)' }}
     >
       {src && (
