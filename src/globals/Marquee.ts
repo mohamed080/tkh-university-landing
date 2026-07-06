@@ -1,3 +1,4 @@
+import { revalidateGlobalAfterChange } from '@/hooks/revalidateHomepage'
 import type { GlobalConfig } from 'payload'
 
 export const Marquee: GlobalConfig = {
@@ -47,4 +48,7 @@ export const Marquee: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
 }

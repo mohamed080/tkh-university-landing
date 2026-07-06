@@ -1,3 +1,4 @@
+import { revalidateGlobalAfterChange } from '@/hooks/revalidateHomepage'
 import type { GlobalConfig } from 'payload'
 
 export const EventsSection: GlobalConfig = {
@@ -39,4 +40,7 @@ export const EventsSection: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
 }

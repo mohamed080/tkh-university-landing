@@ -1,3 +1,4 @@
+import { revalidateGlobalAfterChange } from '@/hooks/revalidateHomepage'
 import type { GlobalConfig } from 'payload'
 
 export const Hero: GlobalConfig = {
@@ -10,13 +11,13 @@ export const Hero: GlobalConfig = {
       type: 'text',
       required: true,
     },
-     {
+    {
       name: 'description',
       label: 'Description',
       type: 'textarea',
       required: true,
     },
-     {
+    {
       name: 'backgroundVideo',
       label: 'Background Video',
       type: 'upload',
@@ -33,7 +34,7 @@ export const Hero: GlobalConfig = {
         description: 'Used on mobile or if video fails to load',
       },
     },
-     {
+    {
       name: 'primaryCTA',
       label: 'Primary CTA',
       type: 'group',
@@ -52,7 +53,7 @@ export const Hero: GlobalConfig = {
         },
       ],
     },
-     {
+    {
       name: 'secondaryCTA',
       label: 'Secondary CTA',
       type: 'group',
@@ -72,4 +73,7 @@ export const Hero: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  },
 }

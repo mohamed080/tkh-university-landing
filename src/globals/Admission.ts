@@ -1,3 +1,4 @@
+import { revalidateGlobalAfterChange } from '@/hooks/revalidateHomepage'
 import type { GlobalConfig } from 'payload'
 
 export const Admissions: GlobalConfig = {
@@ -66,4 +67,7 @@ export const Admissions: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateGlobalAfterChange],
+  }
 }
