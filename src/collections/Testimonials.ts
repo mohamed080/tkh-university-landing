@@ -1,3 +1,4 @@
+import { revalidateAfterChange, revalidateAfterDelete } from '@/hooks/revalidateHomepage'
 import type { CollectionConfig } from 'payload'
 
 export const Testimonials: CollectionConfig = {
@@ -74,4 +75,8 @@ export const Testimonials: CollectionConfig = {
       defaultValue: true,
     },
   ],
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
+  },
 }

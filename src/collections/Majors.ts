@@ -1,3 +1,4 @@
+import { revalidateAfterChange, revalidateAfterDelete } from '@/hooks/revalidateHomepage'
 import type { CollectionConfig } from 'payload'
 
 export const Majors: CollectionConfig = {
@@ -47,4 +48,8 @@ export const Majors: CollectionConfig = {
       defaultValue: true,
     },
   ],
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
+  },
 }

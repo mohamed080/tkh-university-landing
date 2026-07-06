@@ -39,7 +39,21 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Partners, Majors, Events, Testimonials, News],
-  globals: [Header, Hero, Experience, PartnersSection, Marquee, MajorsSection, EventsSection, TestimonialsSection, Admissions, NewsSection, Contact, Footer, SEO],
+  globals: [
+    Header,
+    Hero,
+    Experience,
+    PartnersSection,
+    Marquee,
+    MajorsSection,
+    EventsSection,
+    TestimonialsSection,
+    Admissions,
+    NewsSection,
+    Contact,
+    Footer,
+    SEO,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -51,13 +65,15 @@ export default buildConfig({
   sharp,
   plugins: [
     vercelBlobStorage({
-    enabled: true,
-
-    collections: {
-      media: true,
-    },
-
-    token: process.env.BLOB_READ_WRITE_TOKEN,
-  }),
+      enabled: true,
+      collections: {
+        media: {
+          disableLocalStorage: true,
+        },
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      clientUploads: true,
+      addRandomSuffix: true,
+    }),
   ],
 })

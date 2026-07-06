@@ -33,6 +33,8 @@ Editable CMS sections:
 - **GSAP** (interactive animations)
 - **React Hook Form + Zod** (form validation)
 - **Next.js Image Optimization**
+- **Vercel Blob Storage** (persistent Payload media storage)
+- **ISR + On-demand Revalidation**
 
 ---
 
@@ -58,6 +60,10 @@ DATABASE_URL=mongodb://127.0.0.1:27017/university-landing
 PAYLOAD_SECRET=your-long-random-secret
 
 NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+
+REVALIDATE_SECRET=your-revalidation-secret
+
+BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
 ```
 
 MongoDB Atlas:
@@ -67,7 +73,11 @@ DATABASE_URL=mongodb+srv://USERNAME:PASSWORD@cluster.mongodb.net/tkh-university
 
 PAYLOAD_SECRET=your-long-random-secret
 
-NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+NEXT_PUBLIC_SERVER_URL=https://your-domain.com
+
+REVALIDATE_SECRET=your-revalidation-secret
+
+BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
 ```
 
 ### Environment Variables
@@ -76,7 +86,9 @@ NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 |---|---|
 | DATABASE_URL | MongoDB connection used by Payload CMS |
 | PAYLOAD_SECRET | Secret used by Payload authentication |
-| NEXT_PUBLIC_SERVER_URL | Application base URL |
+| NEXT_PUBLIC_SERVER_URL | Base URL used for server requests |
+| REVALIDATE_SECRET | Protects the Next.js revalidation endpoint |
+| BLOB_READ_WRITE_TOKEN | Allows Payload uploads to use Vercel Blob |
 
 ---
 
@@ -272,21 +284,26 @@ This keeps content scalable and easier to maintain.
 
 ## Media Management
 
-All images and videos are managed through Payload's Media collection.
+All images and videos are uploaded through Payload's Media collection.
+
+Production uploads are stored using **Vercel Blob Storage** instead of local filesystem storage.
+
+This ensures uploaded media:
+
+- Persists after deployments
+- Works correctly on serverless environments
+- Can be managed directly from Payload Admin
 
 No hardcoded image paths are used.
-
-Reusable helpers handle:
-
-- Media URLs
-- Alt text
-- Empty media states
-
 ---
 
 # Rendering & Caching Strategy
 
-The project uses **Static Generation with Incremental Static Regeneration (ISR)**.
+The project uses:
+
+- Static Generation
+- ISR fallback
+- Payload on-demand revalidation
 
 The homepage uses:
 
@@ -294,21 +311,41 @@ The homepage uses:
 export const revalidate = 3600
 ```
 
-This means:
+ISR works as a safety fallback.
 
-- Pages are pre-rendered and cached.
-- Users receive fast static HTML.
-- The page regenerates automatically in the background.
-- CMS changes appear without requiring rebuilds or redeployments.
-- Stale content does not remain forever.
+For instant CMS updates, Payload hooks trigger:
 
-ISR was selected because this is a marketing landing page where:
+```ts
+revalidatePath('/')
+```
 
-- Traffic reads happen frequently.
-- Content updates happen occasionally.
+through:
 
-This provides strong performance while keeping CMS content fresh.
+```txt
+/api/revalidate
+```
 
+Workflow:
+
+```txt
+Payload Admin Update
+        ↓
+afterChange / afterDelete Hook
+        ↓
+Next.js Revalidation API
+        ↓
+Clear Homepage Cache
+        ↓
+Serve Fresh Content
+```
+
+Benefits:
+
+- Static page performance
+- Fast Core Web Vitals
+- CMS edits update without redeployment
+- No client-side loading waterfall
+- Automatic fallback regeneration
 ---
 
 # Performance
@@ -374,6 +411,9 @@ DATABASE_URL=mongodb+srv://USERNAME:PASSWORD@cluster.mongodb.net/tkh-production
 PAYLOAD_SECRET=production-secret
 
 NEXT_PUBLIC_SERVER_URL=https://your-domain.com
+REVALIDATE_SECRET=production-secret-key
+
+BLOB_READ_WRITE_TOKEN=vercel-blob-token
 ```
 
 3. Deploy.

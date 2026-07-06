@@ -1,3 +1,4 @@
+import { revalidateAfterChange, revalidateAfterDelete } from '@/hooks/revalidateHomepage'
 import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
@@ -16,4 +17,8 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
+  },
 }
